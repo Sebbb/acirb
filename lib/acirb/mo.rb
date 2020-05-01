@@ -15,8 +15,8 @@ module ACIrb
     end
 
     # for instance variables
-    attr_reader :children, :attributes
-    attr_accessor :parent, :dirty_props
+    attr_reader :attributes
+    attr_accessor :parent, :dirty_props, :children
 
     # Internal: Returns class prefixes
     def prefixes

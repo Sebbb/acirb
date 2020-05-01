@@ -85,7 +85,7 @@ def getRnPrefixes(pyClassDict):
 
 
 def getLabel(pyClassDict):
-    return pyClassDict['_label']
+    return pyClassDict['_label'] or ''
 
 
 def getRnPrefix(pyClassDict):
@@ -135,7 +135,7 @@ def getRubyClass(pyClassDict):
     @containers = $containers
     @props = $props
     @child_classes = $children
-    @label = '$label'
+    @label = $label
     @naming_props = $namingProps
     @read_only = $readOnly
 
@@ -153,7 +153,7 @@ def getRubyClass(pyClassDict):
                 props=getProps(pyClassDict),
                 children=getChildren(pyClassDict),
                 rn=getRnFunc(pyClassDict),
-                label=getLabel(pyClassDict),
+                label=repr(getLabel(pyClassDict)),
                 namingProps=getNamingProps(pyClassDict),
                 classNameShort=getClassName(pyClassDict).replace('.', ''),
                 readOnly=getReadOnly(pyClassDict),

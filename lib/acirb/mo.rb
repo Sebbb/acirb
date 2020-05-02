@@ -15,8 +15,8 @@ module ACIrb
     end
 
     # for instance variables
-    attr_reader :attributes
-    attr_accessor :parent, :dirty_props, :children
+    attr_reader :children, :attributes
+    attr_accessor :parent, :dirty_props
 
     # Internal: Returns class prefixes
     def prefixes
@@ -129,6 +129,7 @@ module ACIrb
     def get_attributes_to_include
       incl_attr = {}
       @attributes.each do |key, value|
+        raise "Attribute unknown: #{key}, valid: #{props.keys}" unless props.has_key?(key)
         if props[key.to_s]['isDn'] == true || props[key.to_s]['isRn'] == true || @dirty_props.include?(key) || naming_props.include?(key)
           incl_attr[key.to_s] = value
         end

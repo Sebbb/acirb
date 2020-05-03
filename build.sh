@@ -6,7 +6,7 @@ version=`cat pysdk/VERSION`
 
 cat << EOF > lib/acirb/version.rb
 module ACIrb
-	VERSION = '${version}'
+  VERSION = '${version}'
 end
 EOF
 

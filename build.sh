@@ -2,7 +2,7 @@
 echo "Generating ruby model using genrubyfrompy.py"
 python genrubyfrompy.py || (echo "Failed to generate ruby model"; exit 1)
 
-version = `cat pysdk/VERSION`
+version=`cat pysdk/VERSION`
 
 cat << EOF > lib/acirb/version.rb
 module ACIrb

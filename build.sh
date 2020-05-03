@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 echo "Generating ruby model using genrubyfrompy.py"
 python genrubyfrompy.py || (echo "Failed to generate ruby model"; exit 1)
 

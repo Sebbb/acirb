@@ -12,8 +12,12 @@ else
 fi
 mkdir -p pysdk
 cd pysdk
+
+wget -q https://${IP}/insieme/stromboli/meta/Version.js --no-check-certificate -O -|grep versionString| cut -d\' -f2 | sed s/\(/./ | sed s/\)// > VERSION
+
 ssh $APIC_USERNAME@$IP \
 'cd /controller/ishell ||
  cd /controller/mgmt ;
  tar zcf - insieme' | \
 tar zxf -
+

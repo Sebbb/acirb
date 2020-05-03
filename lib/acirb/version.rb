@@ -1,3 +1,3 @@
 module ACIrb
-  VERSION = '1.2.2.H'
+  VERSION = '99.99'
 end

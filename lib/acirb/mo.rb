@@ -186,6 +186,10 @@ module ACIrb
       @dirty_props = []
     end
 
+    def mark_for_destruction
+      self.status = 'deleted'
+    end
+
     def destroy(restclient)
       self.status = 'deleted'
       restclient.post(data: self,

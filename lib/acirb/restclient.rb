@@ -39,26 +39,25 @@ module ACIrb
     #    rest = ACIrb::RestClient.new(url: 'https://apic', user: 'admin',
     #                                 password: 'password', format: 'json',
     #                                 debug: false)
-    def initialize(options = {})
-      uri = URI.parse(options[:url])
+    def initialize(url:, user:, password:, verify: true, debug: false, format: :xml, receive_timeout: nil)
+      uri = URI.parse(url)
       @baseurl = '%s://%s:%s' % [uri.scheme, uri.host, uri.port]
-      @format = options[:format] ? options[:format] : 'xml'
+      @format = format.to_s
 
-      @user = options[:user]
-      @password = options[:password]
-
-      @verify = options[:verify]
+      @user = user
+      @password = password
 
       @client = HTTPClient.new
+                       @client.receive_timeout = receive_timeout if receive_timeout
 
       @client.ssl_config.verify_mode = OpenSSL::SSL::VERIFY_NONE \
-        unless options[:verify] && uri.scheme == 'https'
+        unless verify && uri.scheme == 'https'
 
-      @debug = options[:debug]
+      @debug = debug
 
       @auth_cookie = ''
 
-      authenticate if @user && @password
+      authenticate
     end
 
     # Public: Authenticates the REST session with APIC

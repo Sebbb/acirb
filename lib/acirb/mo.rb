@@ -18,6 +18,12 @@ module ACIrb
     attr_reader :children, :attributes
     attr_accessor :parent, :dirty_props
 
+    attr_accessor :identifier
+
+    def find_child_by_identifier(i)
+      self.children.find{|c| pp [:ident, c.identifier]; c.identifier == i} || yield
+    end
+
     # Internal: Returns class prefixes
     def prefixes
       self.class.prefixes
@@ -66,6 +72,8 @@ module ACIrb
         mark_dirty = true
       end
       create_options.delete(:mark_dirty)
+
+      self.identifier=create_options.delete(:identifier)
 
       @attributes = {}
       @dirty_props = []
